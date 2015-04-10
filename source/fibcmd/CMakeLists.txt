@@ -44,7 +44,10 @@ set(sources
 
 # Build executable
 
-add_executable(${target} ${sources})
+# Use either:
+# GUI_PROPERTIES for GUI applications
+# CONSOLE_PROPERTIES for console applications
+add_executable(${target} ${CONSOLE_PROPERTIES} ${sources})
 
 target_link_libraries(${target} ${libs})
 

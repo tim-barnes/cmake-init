@@ -35,3 +35,13 @@ set(MACOS_COMPILE_FLAGS)
 set(DEFAULT_COMPILE_FLAGS ${MACOS_COMPILE_FLAGS})
 
 set(CMAKE_MACOSX_RPATH TRUE)
+
+# Add platform specific libraries for linking
+set(EXTRA_LIBS "")
+
+# Custom Info.plist enables high resolution on Retina Macs
+set(MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in)
+
+# Use either of them in add_executable()
+set(GUI_PROPERTIES "MACOSX_BUNDLE")
+set(CONSOLE_PROPERTIES "")

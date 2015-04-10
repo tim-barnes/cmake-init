@@ -72,3 +72,7 @@ set(DEFAULT_LINKER_FLAGS ${LINUX_LINKER_FLAGS})
 
 # Add platform specific libraries for linking
 set(EXTRA_LIBS "")
+
+# Use either of them in add_executable()
+set(GUI_PROPERTIES "")
+set(CONSOLE_PROPERTIES "")

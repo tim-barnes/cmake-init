@@ -109,3 +109,7 @@ set(DEFAULT_LINKER_FLAGS_RELEASE
 
 # Add platform specific libraries for linking
 set(EXTRA_LIBS "")
+
+# Use either of them in add_executable()
+set(GUI_PROPERTIES "WIN32")
+set(CONSOLE_PROPERTIES "WIN32")
