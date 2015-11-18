@@ -1,34 +1,49 @@
 
-set(target fiblib)
-message(STATUS "Lib ${target}")
-
-
-# External libraries
+# 
+# Find external dependencies
+# 
 
 # e.g., find_package(THIRDPARTY REQUIRED)
 
 
-# Includes
+# 
+# Declare target
+# 
 
+set(target fiblib)
+message(STATUS "Lib ${target}")
+
+
+# 
+# Includes
+# 
+
+# External includes
 include_directories(
     # e.g., ${TRDP_INCLUDE_DIR}
 )
 
+# Includes of this project
 include_directories(
     BEFORE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 
+# 
 # Libraries
+# 
 
 set(libs
     # e.g., ${THIRDPARTY_LIBRARY}
 )
 
 
+# 
 # Compiler definitions
+# 
 
+# Library import/export
 if (OPTION_BUILD_STATIC)
     add_definitions("-D${META_PROJECT_NAME_UPPER}_STATIC")
 else()
@@ -36,10 +51,12 @@ else()
 endif()
 
 
+# 
 # Sources
+# 
 
 set(include_path "${CMAKE_CURRENT_SOURCE_DIR}/include/${target}")
-set(source_path "${CMAKE_CURRENT_SOURCE_DIR}/source")
+set(source_path  "${CMAKE_CURRENT_SOURCE_DIR}/source")
 
 set(api_includes
     ${include_path}/fiblib_api.h
@@ -59,7 +76,9 @@ source_group_by_path(${source_path} "\\\\.cpp$|\\\\.c$|\\\\.h$|\\\\.hpp$"
     ${source_group} ${sources})
 
 
-# Build library
+# 
+# Build
+# 
 
 add_library(${target} ${api_includes} ${sources})
 
@@ -79,7 +98,9 @@ set_target_properties(${target}
     INCLUDE_PATH	            ${include_path})
 
 
+# 
 # Deployment
+# 
 
 # Library
 install(TARGETS ${target}
