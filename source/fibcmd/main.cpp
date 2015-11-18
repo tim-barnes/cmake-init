@@ -6,13 +6,15 @@
 #include <template-version.h>
 #include <fiblib/Fibonacci.h>
 
+
 int main(int /*argc*/, char* /*argv*/[])
 {
+    // Calculaty and print fibonacci number
     std::cout << "Version: " << TEMPLATE_VERSION << std::endl;
     std::cout << "Fibonacci(8) = " << fiblib::Fibonacci()(8) << std::endl;
     std::cout << std::endl;
 
-    // Read file
+    // Read and display file
     std::cout << "Reading from 'data/example.txt': " << std::endl;
     std::cout << std::endl;
     std::ifstream f("data/example.txt");

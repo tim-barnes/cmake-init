@@ -1,6 +1,7 @@
 
 #pragma once
 
+
 #ifdef _MSC_VER
 #   define FIBLIB_API_EXPORT_DECLARATION __declspec(dllexport)
 #   define FIBLIB_API_IMPORT_DECLARATION __declspec(dllimport)
