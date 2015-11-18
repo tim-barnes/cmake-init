@@ -1,7 +1,10 @@
 
-#message(STATUS "XCODE VERSION :: ${XCODE_VERSION}")
+message(STATUS "Configuring for platform MacOS/XCode.")
 
 # Check compiler and version
+
+#message(STATUS "XCODE VERSION :: ${XCODE_VERSION}")
+
 if ("${XCODE_VERSION}" VERSION_LESS "5")
 
     if ("${XCODE_VERSION}" VERSION_GREATER "0") 

@@ -1,3 +1,4 @@
+
 # C++ CMake Project Template
 
 cmake-init is a copy and paste template, that provides the following features:
@@ -26,5 +27,3 @@ The files of cmake-init are an instantiation of the templates containing:
 | Jenkins | OS X 10.10 | Clang 3.5 | BUILD_TESTS | [![Build Status](http://jenkins.hpi3d.de/buildStatus/icon?job=cmake-init-osx-clang3.5)](http://jenkins.hpi3d.de/job/cmake-init-osx-clang3.5) |
 | Jenkins | Windows 8.1 | MSVC 2013 Update 5 | BUILD_TESTS | [![Build Status](http://jenkins.hpi3d.de/buildStatus/icon?job=cmake-init-windows-msvc2013)](http://jenkins.hpi3d.de/job/cmake-init-windows-msvc2013) |
 | Jenkins | Windows 8.1 | MSVC 2015 | BUILD_TESTS | [![Build Status](http://jenkins.hpi3d.de/buildStatus/icon?job=cmake-init-windows-msvc2015)](http://jenkins.hpi3d.de/job/cmake-init-windows-msvc2015) |
-
-
