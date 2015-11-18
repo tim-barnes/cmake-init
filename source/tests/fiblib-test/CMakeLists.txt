@@ -1,21 +1,37 @@
 
+# 
+# Find external dependencies
+# 
+
+# e.g., find_package(THIRDPARTY REQUIRED)
+
+
+# 
+# Declare target
+# 
+
 set(target fiblib-test)
 message(STATUS "Test ${target}")
 
 
+# 
 # Includes
+# 
 
+# External includes
 include_directories(
-    
 )
 
+# Includes of this project
 include_directories(
     BEFORE
     ${CMAKE_SOURCE_DIR}/source/fiblib/include
 )
 
 
+# 
 # Libraries
+# 
 
 set(libs
     ${GMOCK_LIBRARIES}
@@ -24,14 +40,19 @@ set(libs
 )
 
 
+# 
 # Compiler definitions
+# 
 
+# Library import/export
 if (OPTION_BUILD_STATIC)
     add_definitions("-D${META_PROJECT_NAME_UPPER}_STATIC")
 endif()
 
 
+# 
 # Sources
+# 
 
 set(sources
     main.cpp
@@ -39,7 +60,9 @@ set(sources
 )
 
 
-# Build executable
+# 
+# Build
+# 
 
 add_executable(${target} ${sources})
 
