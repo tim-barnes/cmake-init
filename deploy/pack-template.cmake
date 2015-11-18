@@ -5,12 +5,14 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 
     # Options
 
-    set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
+#    set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
+#    set(CPACK_COMPONENTS_ALL ...)
+
     if(WIN32)
         set(OPTION_PACK_GENERATOR "ZIP;NSIS" CACHE STRING "Package targets")
     else()
         set(OPTION_PACK_GENERATOR "ZIP;TGZ;DEB" CACHE STRING "Package targets")
-        set(CPACK_DEB_COMPONENT_INSTALL ON)
+#        set(CPACK_DEB_COMPONENT_INSTALL ON)
     endif()
 
 
@@ -48,7 +50,7 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 
     # Package specific options
 
-    set(CMAKE_MODULE_PATH                   ${CMAKE_SOURCE_DIR}/packages/${project_name})
+    set(CMAKE_MODULE_PATH                   ${CMAKE_SOURCE_DIR}/deploy/${project_name})
 
 
     # Package information
@@ -64,7 +66,7 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     set(CPACK_RESOURCE_FILE_README          "${CMAKE_SOURCE_DIR}/README.md")
     set(CPACK_RESOURCE_FILE_WELCOME         "${CMAKE_SOURCE_DIR}/README.md")
     set(CPACK_PACKAGE_DESCRIPTION_FILE      "${CMAKE_SOURCE_DIR}/README.md")
-    set(CPACK_PACKAGE_ICON                  "${CMAKE_SOURCE_DIR}/packages/logo.bmp")
+    set(CPACK_PACKAGE_ICON                  "${CMAKE_SOURCE_DIR}/deploy/logo.bmp")
     set(CPACK_PACKAGE_RELOCATABLE           OFF)
 
     # NSIS package information
@@ -88,8 +90,8 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
         set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES64")
     endif()
     #set(CPACK_NSIS_DISPLAY_NAME             "${package_name}-${META_VERSION}")
-    set(CPACK_NSIS_MUI_ICON    "${CMAKE_SOURCE_DIR}/packages/logo.ico")
-    set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/packages/logo.ico")
+    set(CPACK_NSIS_MUI_ICON    "${CMAKE_SOURCE_DIR}/deploy/logo.ico")
+    set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/deploy/logo.ico")
 
     # Debian package information
 
@@ -126,6 +128,7 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 #   set(CPACK_RPM_<POST/PRE>_<UN>INSTALL_SCRIPT_FILE     "")
 #   set(CPACK_RPM_PACKAGE_DEBUG                          1)
     set(CPACK_RPM_PACKAGE_RELOCATABLE                    OFF)
+    set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE               "")
 
 
     # Package name
