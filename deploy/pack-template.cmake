@@ -3,20 +3,25 @@
 
 if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 
-    # Options
+# set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
+# set(CPACK_COMPONENTS_ALL ...)
+# set(CPACK_DEB_COMPONENT_INSTALL ON)
 
-#    set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
-#    set(CPACK_COMPONENTS_ALL ...)
+
+    # 
+    # Package formats
+    # 
 
     if(WIN32)
         set(OPTION_PACK_GENERATOR "ZIP;NSIS" CACHE STRING "Package targets")
     else()
         set(OPTION_PACK_GENERATOR "ZIP;TGZ;DEB" CACHE STRING "Package targets")
-#        set(CPACK_DEB_COMPONENT_INSTALL ON)
     endif()
 
 
-    # Initialize
+    # 
+    # Initialize CPack
+    # 
 
     # Reset CPack configuration
     if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
@@ -34,11 +39,14 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     set(CPACK_COMMAND "${CPACK_PATH}/cpack")
 
 
-    # Package project
+    # 
+    # Package information
+    # 
+
+    # Package information
 
     set(project_name ${META_PROJECT_NAME})   # Name of package project
     set(project_root ${META_PROJECT_NAME})   # Name of root project that is to be installed
-
 
     # Package information
 
@@ -51,7 +59,6 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     # Package specific options
 
     set(CMAKE_MODULE_PATH                   ${CMAKE_SOURCE_DIR}/deploy/${project_name})
-
 
     # Package information
 
@@ -69,7 +76,14 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     set(CPACK_PACKAGE_ICON                  "${CMAKE_SOURCE_DIR}/deploy/logo.bmp")
     set(CPACK_PACKAGE_RELOCATABLE           OFF)
 
-    # NSIS package information
+    # Package name
+
+    set(CPACK_PACKAGE_FILE_NAME "${package_name}-${CPACK_PACKAGE_VERSION}")
+
+
+    # 
+    # NSIS package (Windows)
+    # 
 
     if(WIN32 AND CPACK_PACKAGE_ICON)
         # NOTE: for using MUI (UN)WELCOME images we suggest to replace nsis defaults,
@@ -93,7 +107,10 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     set(CPACK_NSIS_MUI_ICON    "${CMAKE_SOURCE_DIR}/deploy/logo.ico")
     set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/deploy/logo.ico")
 
-    # Debian package information
+
+    # 
+    # Debian package (Linux)
+    # 
 
     set(CPACK_DEBIAN_PACKAGE_NAME           "${package_name}")
     set(CPACK_DEBIAN_PACKAGE_VERSION        "${CPACK_PACKAGE_VERSION}")
@@ -108,7 +125,9 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA  "")
 
 
-    # RPM package information
+    # 
+    # RPM package (Linux)
+    # 
 
     set(CPACK_RPM_PACKAGE_NAME                           "${package_name}")
     set(CPACK_RPM_PACKAGE_VERSION                        "${CPACK_PACKAGE_VERSION}")
@@ -131,11 +150,9 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE               "")
 
 
-    # Package name
-
-    set(CPACK_PACKAGE_FILE_NAME "${package_name}-${CPACK_PACKAGE_VERSION}")
-
+    # 
     # Optional Preliminaries (i.e., silent Visual Studio Redistributable install)
+    # 
 
     if(NOT INSTALL_MSVC_REDIST_FILEPATH)
         set(INSTALL_MSVC_REDIST_FILEPATH "" CACHE FILEPATH "Visual C++ Redistributable Installer (note: manual match the selected generator)" FORCE)
@@ -152,6 +169,11 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
             ")
     endif()
 
+
+    # 
+    # Execute CPack
+    # 
+
     # Install files
 
     set(CPACK_INSTALL_CMAKE_PROJECTS        "${CMAKE_BINARY_DIR};${project_root};ALL;/")
@@ -166,7 +188,6 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 
     set(CPACK_OUTPUT_CONFIG_FILE "${CMAKE_BINARY_DIR}/CPackConfig-${project_name}.cmake")
     set(CPACK_GENERATOR ${OPTION_PACK_GENERATOR})
-
 
     # CPack
 
