@@ -4,6 +4,7 @@
 #include <string>
 
 #include <template-version.h>
+#include <fiblib/fiblib_meta.h>
 #include <fiblib/Fibonacci.h>
 
 
@@ -15,9 +16,9 @@ int main(int /*argc*/, char* /*argv*/[])
     std::cout << std::endl;
 
     // Read and display file
-    std::cout << "Reading from 'data/example.txt': " << std::endl;
+    std::cout << "Reading from '" << g_libraryPath << "data/example.txt': " << std::endl;
     std::cout << std::endl;
-    std::ifstream f("data/example.txt");
+    std::ifstream f(g_libraryPath + "/data/example.txt");
     if (f.is_open()) {
         std::string line;
         while (getline(f, line)) {

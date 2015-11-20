@@ -61,6 +61,7 @@ set(source_path  "${CMAKE_CURRENT_SOURCE_DIR}/source")
 set(api_includes
     ${include_path}/fiblib_api.h
     ${include_path}/Fibonacci.h
+    ${include_path}/fiblib_meta.h
 )
 
 set(sources
@@ -80,13 +81,11 @@ source_group_by_path(${source_path} "\\\\.cpp$|\\\\.c$|\\\\.h$|\\\\.hpp$"
 # Build
 # 
 
-add_library(${target} ${api_includes} ${sources})
+add_library("${target}-temp" OBJECT ${api_includes} ${sources})
 
-target_link_libraries(${target} ${libs})
+target_compile_options("${target}-temp" PRIVATE ${DEFAULT_COMPILE_FLAGS})
 
-target_compile_options(${target} PRIVATE ${DEFAULT_COMPILE_FLAGS})
-
-set_target_properties(${target}
+set_target_properties("${target}-temp"
     PROPERTIES
     LINKER_LANGUAGE              CXX
     FOLDER                      "${IDE_FOLDER}"
@@ -97,13 +96,35 @@ set_target_properties(${target}
     DEBUG_POSTFIX               "d${DEBUG_POSTFIX}"
     INCLUDE_PATH	            ${include_path})
 
+add_library(${target} ${TEMPLATE_META_SOURCE} $<TARGET_OBJECTS:fiblib-temp>)
+set_target_properties("${target}"
+    PROPERTIES
+    OUTPUT_NAME "${target}"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+)
+
+target_link_libraries(${target} ${libs})
+
+add_library("${target}-install" ${TEMPLATE_META_SOURCE_INSTALL} $<TARGET_OBJECTS:fiblib-temp>)
+set_target_properties("${target}-install"
+    PROPERTIES
+    OUTPUT_NAME "${target}"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/temp"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/temp"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/temp"
+)
+
+target_link_libraries("${target}-install" ${libs})
+
 
 # 
 # Deployment
 # 
 
 # Library
-install(TARGETS ${target}
+install(TARGETS "${target}-install"
     RUNTIME DESTINATION ${INSTALL_BIN}
     LIBRARY DESTINATION ${INSTALL_SHARED}
     ARCHIVE DESTINATION ${INSTALL_LIB}

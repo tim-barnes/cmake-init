@@ -1,0 +1,5 @@
+
+#include <fiblib/fiblib_meta.h>
+
+
+std::string g_libraryPath = "${VAR_RUNTIME_DIR}";
