@@ -71,6 +71,7 @@ target_compile_options(${target} PRIVATE ${DEFAULT_COMPILE_FLAGS})
 
 set_target_properties(${target}
     PROPERTIES
+    INSTALL_VERSION              FALSE
     LINKER_LANGUAGE              CXX
     FOLDER                      "${IDE_FOLDER}"
     COMPILE_DEFINITIONS_DEBUG   "${DEFAULT_COMPILE_DEFS_DEBUG}"

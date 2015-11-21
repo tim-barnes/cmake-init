@@ -10,13 +10,16 @@
 
 int main(int /*argc*/, char* /*argv*/[])
 {
-    // Calculaty and print fibonacci number
+    // Print out library path
+    std::cout << "path = " << g_libraryPath << std::endl;
+
+    // Calculate and print fibonacci number
     std::cout << "Version: " << TEMPLATE_VERSION << std::endl;
     std::cout << "Fibonacci(8) = " << fiblib::Fibonacci()(8) << std::endl;
     std::cout << std::endl;
 
     // Read and display file
-    std::cout << "Reading from '" << g_libraryPath << "data/example.txt': " << std::endl;
+    std::cout << "Reading from '" << g_libraryPath << "/data/example.txt': " << std::endl;
     std::cout << std::endl;
     std::ifstream f(g_libraryPath + "/data/example.txt");
     if (f.is_open()) {

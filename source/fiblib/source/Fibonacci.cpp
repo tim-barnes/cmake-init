@@ -1,7 +1,4 @@
 
-#include <iostream>
-#include <fiblib/fiblib_meta.h>
-
 #include <fiblib/Fibonacci.h>
 
 
@@ -11,7 +8,6 @@ namespace fiblib
 
 Fibonacci::Fibonacci()
 {
-    std::cout << "path = " << g_libraryPath << std::endl;
 }
 
 Fibonacci::~Fibonacci()
