@@ -94,8 +94,31 @@ do
     elif [ -f "$HOME/.localconfig/$ARG" ]
     then
         . "$HOME/.localconfig/$ARG"
-    else
-        echo "Configuration \"$ARG\" not found (searched in ./.localconfig and ~/.localconfig)"
+    
+	# Clean option - removes working folders
+	elif [ "$ARG" == "clean" ]	
+	then 
+		if [ -d "./.localconfig" ]
+		then
+		    rm -Rf ./.localconfig
+			echo "Cleaned ./.localconfig"
+		fi
+		
+		if [ -d "./$BUILD_DIR" ]
+		then
+			rm -Rf ./$BUILD_DIR
+			echo "Cleaned ./$BUILD_DIR"
+		fi
+		
+		if [ -d "${BUILD_DIR}-debug" ]
+		then
+			rm -Rf ./${BUILD_DIR}-debug
+			echo "Cleaned ./$BUILD_DIR-debug"
+		fi
+		
+		exit
+	else
+	    echo "Configuration \"$ARG\" not found (searched in ./.localconfig and ~/.localconfig)"
     fi
 done
 
